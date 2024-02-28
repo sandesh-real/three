@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <canvas class="draw"></canvas>
+
+   <script type="module">
+    import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/0.161.0/three.module.js';
+    const scene=new THREE.Scene();
+    const box=new THREE.BoxGeometry(1,1,1);
+    const material=new THREE.MeshBasicMaterial({color:0xffff00});
+    const mesh=new THREE.Mesh(box,material);
+    const aspect={
+        width:window.innerWidth,
+        height:window.innerHeight
+    }
+    const camera=new THREE.PerspectiveCamera(45,aspect.width/aspect.height,1,2000);
+    camera.position.z=3;
+    scene.add(mesh);
+    scene.add(camera)
+
+    const canvas=document.querySelector('.draw');
+    const renderer=new THREE.WebGLRenderer({canvas:canvas})
+    renderer.setSize(aspect.width,aspect.height);
+    renderer.render(scene,camera)
+  
+   </script>
+    <script src="script.js" type="module"></script>
+</body>
+</html>
